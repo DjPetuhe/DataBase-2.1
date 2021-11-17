@@ -53,9 +53,13 @@ SELECT TOP (30)
 HaircutName,
 Gender,
 HaircutID
-  FROM Haircut
+  FROM Barbershop.dbo.Haircut
 GO
 
 --Обнуление таблицы стрижек
-TRUNCATE TABLE Haircut
+TRUNCATE TABLE Barbershop.dbo.Haircut
+GO
+
+--Снос таблицы стрижек
+DROP TABLE Barbershop.dbo.Haircut
 GO

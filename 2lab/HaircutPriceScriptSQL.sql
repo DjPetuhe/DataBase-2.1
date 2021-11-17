@@ -121,9 +121,13 @@ SELECT TOP (90)
 HaircutID,
 Price,
 [Date]
-  FROM HaircutPrice
+  FROM Barbershop.dbo.HaircutPrice
 GO
 
 --Обнуление таблички цен на стрижки
-TRUNCATE TABLE Haircut
+TRUNCATE TABLE Barbershop.dbo.Haircut
+GO
+
+--Снос таблицы цен на стрижки
+DROP TABLE Barbershop.dbo.HaircutPrice
 GO

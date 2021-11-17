@@ -42,9 +42,13 @@ Surname,
 Patronymic,
 Class,
 BarberID
-  FROM Barber
+  FROM Barbershop.dbo.Barber
 GO
 
 --Обнуление таблички парикмахеров
-TRUNCATE TABLE Barber
+TRUNCATE TABLE Barbershop.dbo.Barber
+GO
+
+--Снос таблицы парикмахеров
+DROP TABLE Barbershop.dbo.Barber
 GO

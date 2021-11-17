@@ -7,7 +7,7 @@ CREATE TABLE [dbo].[Client](
 	[Surname] [nvarchar](50) NOT NULL,
 	[Patronymic] [nvarchar](50) NULL,
 	[AmountOfHaircuts] [int] DEFAULT 0,
-	[Discount] [int] NULL,
+	[Discount] [int] DEFAULT 0,
 	[ClientID] int IDENTITY(1,1)
 )
 GO
@@ -134,9 +134,11 @@ GO
 
 --Установление количества стрижек по документам
 UPDATE Client 
-SET AmountOfHaircuts = COUNT(*) 
-FROM PaymentDoc 
-WHERE PaymentDoc.ClientID = Client.ClientID
+SET AmountOfHaircuts = (
+	SELECT COUNT(*) 
+	FROM PaymentDoc 
+	WHERE PaymentDoc.ClientID = Client.ClientID
+	)
 GO
 
 --Обнуление количества стрижек
@@ -152,7 +154,7 @@ Patronymic,
 AmountOfHaircuts,
 Discount,
 ClientID
-  FROM Client
+  FROM Barbershop.dbo.Client
 GO
 
 --Удаление всех клиентов, у которых было совершено 0 стрижек
@@ -161,5 +163,9 @@ WHERE AmountOfHaircuts = 0
 GO
 
 --Обнуление таблицы клиентов
-TRUNCATE TABLE Client
+TRUNCATE TABLE Barbershop.dbo.Client
+GO
+
+--Снос таблицы клиентов
+DROP TABLE Barbershop.dbo.Client
 GO

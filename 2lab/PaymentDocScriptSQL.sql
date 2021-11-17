@@ -1,7 +1,7 @@
 USE [Barbershop]
 GO
 
---Создание таблицы документа
+--Создание таблицы документа об оплате
 CREATE TABLE [dbo].[PaymentDoc](
 	[FinalPrice] [money] DEFAULT 0,
 	[DateOfHaircut] [date] NOT NULL,
@@ -41,7 +41,7 @@ GO
 
 --Вставка 20 разных чеков на 3 разные даты
 INSERT INTO PaymentDoc (DateOfHaircut, MainOffice, HaircutID, ClientID, BarberID) VALUES
-('11/14/2021', 0, 6, 95, 6),
+('11/14/2021', 0, 6, 94, 6),
 ('11/14/2021', 0, 30, 75, 4),
 ('11/14/2021', 1, 17, 19, 5),
 ('11/14/2021', 1, 10, 33, 14),
@@ -86,7 +86,7 @@ INSERT INTO PaymentDoc (DateOfHaircut, MainOffice, HaircutID, ClientID, BarberID
 ('11/16/2021', 0, 12, 67, 5),
 ('11/16/2021', 0, 3, 20, 10),
 ('11/16/2021', 0, 22, 16, 7),
-('11/16/2021', 1, 4, 53, 9),
+('11/16/2021', 1, 4, 94, 9),
 ('11/16/2021', 1, 10, 85, 1),
 ('11/16/2021', 0, 1, 98, 8),
 ('11/16/2021', 1, 16, 87, 5),
@@ -112,19 +112,24 @@ GO
 --Обновление финальной цены, если у клиента есть скидка
 UPDATE PaymentDoc
 SET FinalPrice -= FinalPrice * Discount / 100 FROM Client
+WHERE PaymentDoc.ClientID = Client.ClientID
 GO
 
---Просмотр таблички документов
-SELECT TOP (60)
+--Просмотр таблички документов об оплате
+SELECT TOP (120)
 FinalPrice,
 DateOfHaircut,
 MainOffice,
 HaircutID,
 ClientID,
 BarberID
-  FROM PaymentDoc
+  FROM Barbershop.dbo.PaymentDoc
 GO
 
---Обнуление таблицы парикмахера
-TRUNCATE TABLE Barber
+--Обнуление таблицы документов об оплате
+TRUNCATE TABLE Barbershop.dbo.PaymentDoc
+GO
+
+--Снос таблицы документов об оплате
+DROP TABLE Barbershop.dbo.PaymentDoc
 GO
