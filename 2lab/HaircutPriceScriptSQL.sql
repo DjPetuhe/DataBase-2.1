@@ -5,7 +5,7 @@ GO
 CREATE TABLE [dbo].[HaircutPrice](
 	[HaircutID] [int] NOT NULL,
 	[Price] [money] NOT NULL,
-	[Date] [date] NOT NULL
+	[Date] [date] NOT NULL,
 )
 GO
 
@@ -15,6 +15,11 @@ WITH CHECK ADD CONSTRAINT FK_HaircutPrice_Haircut FOREIGN KEY(HaircutID)
 REFERENCES Haircut (HaircutID)
 ON UPDATE CASCADE
 ON DELETE CASCADE
+GO
+
+--Ограничение на внутренний ключ  цен стрижек
+ALTER TABLE HaircutPrice
+ADD CONSTRAINT PK_HaircutPrice_HaircutPrice PRIMARY KEY CLUSTERED (HaircutID, [Date])
 GO
 
 --Выставление сегодняшней даты по умолчанию

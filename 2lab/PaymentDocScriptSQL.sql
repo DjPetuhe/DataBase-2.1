@@ -8,8 +8,14 @@ CREATE TABLE [dbo].[PaymentDoc](
 	[MainOffice] [bit] NOT NULL,
 	[HaircutID] [int] NOT NULL,
 	[ClientID] [int] NOT NULL,
-	[BarberID] [int] NOT NULL
+	[BarberID] [int] NOT NULL,
+	[PaymentDocID] int IDENTITY(1,1)
 )
+GO
+
+--Ограничение внутреннего ключа парикмахеров
+ALTER TABLE PaymentDoc
+ADD CONSTRAINT PK_PaymentDoc_PaymentDocID PRIMARY KEY CLUSTERED (PaymentDocID)
 GO
 
 --Ограничение на внешний ключ стрижки
@@ -122,7 +128,8 @@ DateOfHaircut,
 MainOffice,
 HaircutID,
 ClientID,
-BarberID
+BarberID,
+[PaymentDocID]
   FROM Barbershop.dbo.PaymentDoc
 GO
 
