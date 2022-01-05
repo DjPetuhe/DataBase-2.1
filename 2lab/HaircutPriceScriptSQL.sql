@@ -130,7 +130,7 @@ Price,
 GO
 
 --Обнуление таблички цен на стрижки
-TRUNCATE TABLE Barbershop.dbo.Haircut
+TRUNCATE TABLE Barbershop.dbo.HaircutPrice
 GO
 
 --Снос таблицы цен на стрижки
